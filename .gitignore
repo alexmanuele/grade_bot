@@ -1,7 +1,1 @@
-import json
-import sys
-import pprint
-with open("courses.json", "r") as file:
-    previously_stored = json.load(file)
-
-pprint.pprint(previously_stored)
+courses.json
