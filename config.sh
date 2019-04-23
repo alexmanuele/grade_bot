@@ -19,7 +19,7 @@ echo "Enter your password. This will be stored locally"
 read dalpw
 echo "Entered your recipient email address"
 read email
-echo "python3 grade_scrape.py $dalid $dalpw $email" > grades.sh
+echo "python3 $cwd/grade_scrape.py $dalid $dalpw $email" > grades.sh
 chmod 700 grades.sh
 cwd=`pwd`
 crontab -l > tempfile
