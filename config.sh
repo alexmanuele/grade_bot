@@ -1,6 +1,7 @@
 #!/bin/bash
 result=`python3 dependencies.py`
 path_to_chrome="/usr/bin/chromedriver"
+cwd=`pwd`
 if [ "$result"=="0" ]; then
 	echo "Selenium is installed"
 else
@@ -19,12 +20,13 @@ echo "Enter your password. This will be stored locally"
 read dalpw
 echo "Entered your recipient email address"
 read email
-echo "python3 $cwd/grade_scrape.py $dalid $dalpw $email" > grades.sh
+echo "cd $cwd" > grades.sh
+echo "python3 $cwd/grade_scrape.py $dalid $dalpw $email" >> grades.sh
 chmod 700 grades.sh
-cwd=`pwd`
 crontab -l > tempfile
-echo "0 6,9,12,15,18 * * * $cwd/grades.sh" >> tempfile
-echo "0 0 1 07 * $cwd/stop.sh" >> tempfile
+echo "0 6,9,12,15,18 * * * bash $cwd/grades.sh" >> tempfile
+echo "0 0 1 07 * bash $cwd/stop.sh" >> tempfile
+echo "" >> tempfile
 crontab tempfile
 rm tempfile
 echo "Configured to run 5 times a day from 6:00pm until 6:00pm"
